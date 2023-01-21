@@ -2,17 +2,19 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 
 
-contract Manage{
-    address public tokenAddress;
-    address owner;
 
-    constructor(address _tokenAddress){
+contract Manage is Ownable{
+    IERC20 public tokenAddress;
+    address ownerAdd;
+    uint id = 0;
+
+    constructor(IERC20 _tokenAddress){
         tokenAddress = _tokenAddress;
-        owner = msg.sender;
+        ownerAdd = msg.sender;
 
     }
     
@@ -22,7 +24,7 @@ contract Manage{
     event studentVerified(uint batch, string studentId, string name, bool verifyStatus); // verified by admin
     // event 
     event tokenTransfer(address sender, address reciever, uint amount);
-    event productCreated(uint productId,string imageUrl,string name,uint price);
+    event productCreated(string imageUrl,string name,uint price);
 
 
     struct Student{
@@ -44,13 +46,14 @@ contract Manage{
     }
     Product[] public products;
 
-    mapping (address studentAddress => Student studentData)  public studentAddressToDetail;
+    mapping (address => Student)  public studentAddressToDetail;
 
 
 
-    function verify(address _studentAddress) onlyOwner{
-        studentAddressToDetail[_studentAddress].verified = true;
-        emit studentVerified(_batch,_studentId,_name,true);
+    function verify(address _studentAddress) public onlyOwner{
+        Student memory student = studentAddressToDetail[_studentAddress];
+        student.verified = true;
+        emit studentVerified(student.batch,student.studentId,student.name,true);
     }
 
     function createStudent(string memory _image, string memory _studentId,string memory _name,uint _batch) public{
@@ -59,47 +62,47 @@ contract Manage{
 
     }
 
-    function sendToken(address _to, uint _amount) public{
-                // Get the token contract
-        ERC20 token = ERC20(tokenAddress);
+    function sendTokenToAddress(address _to, uint _amount) public{
+        uint sendToken;
 
-
-        if ((msg.sender == owner) ){
-            uint sendToken = _amount;
-            require(token.transfer(_to, sendToken), "Transfer failed");
+        if(msg.sender == ownerAdd){
+            sendToken = _amount;
+            (bool sent) =  tokenAddress.transfer(_to, sendToken);
+            require(sent, "Transfer failed");
             studentAddressToDetail[_to].balance+=sendToken;
         }
         else{
          if(studentAddressToDetail[msg.sender].batch == studentAddressToDetail[_to].batch){
-            uint sendToken = _amount;
+            sendToken = _amount;
 
 
         }
         else {
-            uint sendToken = (750*_amount)/1000;
+            sendToken = (750*_amount)/1000;
         }
         
         require(studentAddressToDetail[msg.sender].balance >= sendToken,"insufficient balance to send");
         // Transfer the tokens
-        require(token.transfer(_to, sendToken), "Transfer failed");
+        require(tokenAddress.transfer(_to, sendToken), "Transfer failed");
         studentAddressToDetail[_to].balance+=sendToken;
-        studentAddressToDetail[msg.sender]-= sendToken;
+        studentAddressToDetail[msg.sender].balance-= sendToken;
 
         }
 
-        emit tokenTransfer(msg.sender,_to,_amount)
+        emit tokenTransfer(msg.sender,_to,_amount);
     }
 
-    function buyMerch(uint _price, ){
-        ERC20 token = ERC20(tokenAddress);
+    function buyMerch(uint _price) public{
+        // SafeERC20 token = SafeERC20(tokenAddress);
         require(studentAddressToDetail[msg.sender].balance>=_price,"insufficient balance");
-        require(sendToken(owner,_price),"failed to send token");
-        studentAddressToDetail[msg.sender]-=_price;
+        (bool sent) =  tokenAddress.transfer(ownerAdd, _price);
+        require(sent, "Transfer failed");
+        studentAddressToDetail[msg.sender].balance-=_price;
     }
 
     function listProduct(string memory _image, string memory _name,uint _price) public{
         uint productId = id;
-        products.push(Product(productId,_image,_name,_category,_price,_token,_quantity,msg.sender));
+        products.push(Product(productId,_image,_name,_price));
         id++;
 
         //emit event productCreated
