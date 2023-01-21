@@ -1,0 +1,36 @@
+specVersion: 0.0.5
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Manage
+    network: mumbai
+    source:
+      address: "0x35e50711A230c5963f68f9C2e198d53046c73425"
+      abi: Manage
+      startBlock: 31227294
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - OwnershipTransferred
+        - productCreated
+        - studentCreated
+        - studentVerified
+        - tokenTransfer
+      abis:
+        - name: Manage
+          file: Manage\abis\Manage.json
+      eventHandlers:
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: productCreated(string,string,uint256)
+          handler: handleproductCreated
+        - event: studentCreated(uint256,string,string,address)
+          handler: handlestudentCreated
+        - event: studentVerified(uint256,string,string,bool)
+          handler: handlestudentVerified
+        - event: tokenTransfer(address,address,uint256)
+          handler: handletokenTransfer
+      file: Manage\Manage.wasm
