@@ -26,9 +26,19 @@ nav {
 }
 
 /* right side button */  
-.right-side{
+.container{
+  margin: 2% 6% 2% 0%;
+  /* margin; */
 }
 
+.admin-btn{
+  position: relative;
+
+}
+.btn-container{
+position: absolute;
+right: 0;
+}
 
 .add-merchant-btn {
   background-color: #ffc107;
@@ -46,11 +56,14 @@ nav {
 }
 
 /* Batch Button*/
+.middle-container{
+  margin-top: 8%;
+}
 
 .buttons-container {
   display: flex;
   justify-content: space-between;
-  margin: 3% 2% 4% 2%;
+  margin: 0% 2% 4% 2%;
 }
 
 .button {
@@ -60,6 +73,7 @@ nav {
   text-align: center;
   border-radius: 5px;
   margin: 0 1%;
+  border: none;
 }
 
 .button-1 {
@@ -132,14 +146,13 @@ th, td {
   border-radius: 5px;
   text-align: center;
   font-size: 1.2em;
+  border: none;
 }
 
 
 /* footer part */
 
-.footer-section{
- 
-}
+
 
 .nav-footer{
   display: block;
@@ -165,4 +178,139 @@ footer h6 {
 
 .copyright-content{
   margin-left: 20px;
+}
+
+.input-area{
+  width: 500px;
+  margin: 1rem;
+  height: 37px;
+  border-radius: 7px;
+  border: 1px solid black;
+  background: transparent;
+  color: white;
+}
+
+.input-area::placeholder{
+  /* color: whit; */
+  padding-left: 10px;
+  /* opacity: 0.6; */
+}
+
+.upload-btn{
+  /* width: 10%; */
+  margin-left: 30%;
+  height: 40px;
+  background: #ffc107;
+  color: #333;
+  border: none;
+}
+.NotStudentTab-div{
+  width: 50%;
+  margin: auto;
+}
+.admin-panel-m{
+  display: flex;
+  flex-direction: column;
+}
+.card-section{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.addProduct-btn{
+  /* width: 40%; */
+  padding: 0.5rem;
+  /* height: 2.2rem; */
+  font-size: 1rem;
+  background: #ffc107;
+  color: #333;
+  border: none;
+  margin: 2rem 0 2rem 40%;
+
+
+}
+.cards-array{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+.inside-main{
+  text-align: center;
+  width: 300px;
+  height: 400px;
+  padding-top: 30px;
+  box-sizing: border-box;
+  margin: 10px;
+  box-shadow: 0 -5px 5px #ccc;
+  box-shadow: 0px -5px 5px #ccc, -5px -5px 10px #ddd;
+  box-shadow: 3px 3px 3px #ccc, -3px 3px 3px #ccc, -3px -3px 3px #ccc, 3px -3px 3px #ccc;
+  border-radius: 10px;
+  color: #333;
+}
+.buy-btn{
+  width: 40%;
+  height: 2.2rem;
+  font-size: 1.2rem;
+  background: #ffc107;
+  color: #333;
+  border: none;
+}
+
+.product-form{
+  width: 50%;
+  margin: auto;
+}
+
+
+
+
+/* student-container */
+.student-container{
+  margin: 5%;
+}
+
+/* profile-container */
+.profile {
+  display: inline;
+  align-items: center;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+}
+
+.profile-info img {
+  width: 13%;
+  border-radius: 50%;
+  margin-bottom: 0.5rem; 
+}
+
+.profile-name {
+  font-size: 2rem;
+}
+
+/* middle-container */
+.middle-container{
+  text-align: center;
+}
+
+.btn{
+color: #333;
+display: inline;
+width: 12%;
+margin: 10px;
+height: 10%;
+background-color: #ffc107;
+border: none;
+height: 40px;
+font-size: 1rem;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
 }

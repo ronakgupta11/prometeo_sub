@@ -4,8 +4,8 @@ pragma solidity ^0.8.17;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-// 0x35e50711A230c5963f68f9C2e198d53046c73425
-// https://mumbai.polygonscan.com/address/0x35e50711A230c5963f68f9C2e198d53046c73425#code
+// 0x391Ee177255844e97fB7455d425DD0674d2CDe8A
+// https://mumbai.polygonscan.com/address/0x391Ee177255844e97fB7455d425DD0674d2CDe8A#code
 
 
 contract Manage is Ownable{
@@ -111,6 +111,10 @@ contract Manage is Ownable{
         emit productCreated(_image,_name,_price);
     }
 
+    function getData(address _studentAddress) public view returns(Student memory){
+        Student memory student = studentAddressToDetail[_studentAddress];
+        return student;
+    }
 
 
 

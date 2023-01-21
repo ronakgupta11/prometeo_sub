@@ -1,45 +1,47 @@
+
 import { BigNumber } from "ethers";
 import { useState } from "react";
 import { ethers } from "ethers";
+
 import {abi,contractAddress} from "../constants/index.js"
-
-export default function NotStudentTab(props){
-
+export default function ProductDetails(props){
 
 
-    const zero = BigNumber.from("0");
-    const [image,setImage] = useState("");
+
+    
+  const zero = BigNumber.from("0");
+    const [imageUrl,setImageUrl] = useState("");
     const [name,setName] = useState("");
-    const [studentId,setStudentId] = useState("");
-    const [batch,setBatch] = useState(zero);
+    
+    const [price,setPrice] = useState(zero);
+    
+
+
+
 
 
     function handleImage(e){
-        setImage(e.target.value);
+        setImageUrl(e.target.value);
 
     }
     function handleName(e){
         setName(e.target.value);
 
     }
-    function handleStudentId(e){
-        setStudentId(e.target.value);
+
+    function handlePrice(e){
+        console.log(e.target.value)
+        setPrice(e.target.value);
 
     }
-    function handleBatch(e){
-        setBatch(BigNumber.from(e.target.value));
 
-    }
 
-    
     const upload = async () => {
         try {
-
             props.setLoading(true);
           // Get the signer from web3Modal, which in our case is MetaMask
           // No need for the Signer here, as we are only reading state from the blockchain
           const signer = await props.getSigner(true);
-
           // We connect to the Contract using a signer because we want the owner to
           // sign the transaction
           const contract = new ethers.Contract(
@@ -49,7 +51,7 @@ export default function NotStudentTab(props){
           );
         //   setLoading(true);
           // call the startGame function from the contract
-          const tx = await contract.createStudent(image,studentId,name,batch);
+          const tx = await contract.listProduct(imageUrl,name,price);
           await tx.wait();
           props.setLoading(false);
         } catch (err) {
@@ -57,27 +59,31 @@ export default function NotStudentTab(props){
           props.setLoading(false);
         }
       };
+    
+
     return(
-        <div className="NotStudentTab-div">
+    
+        <div className="product-form">
+             
                     <div >
                         <input onChange={handleImage} className="input-area" type="text" id="product-image" placeholder="Enter image Url"></input>
                     </div>
                     <div>
-                        <input onChange={handleStudentId} className="input-area" type="text" id="product-category" placeholder="Enter Student Id"></input>
+                        <input onChange={handleName} className="input-area" type="text" id="product-name" placeholder="Enter Product Name"></input>
                     </div>
-                    <div>
-                        <input onChange={handleName} className="input-area" type="text" id="product-name" placeholder="Enter Name"></input>
+
+                    <div >
+                        <input onChange={handlePrice} className="input-area price-input" type="text" id="product-category" placeholder="Enter Price"></input>
                     </div>
-                    <div>
-                        <input onChange={handleBatch} className="input-area" type="text" id="product-category" placeholder="Enter Batch"></input>
-                    </div>
-                    
-                    <button onClick={() => upload()} className="upload-btn">{props.loading?"loading...":"Upload Details"}</button>
-                
 
                     
+             
+                    <div >
+                        <button onClick={() => upload()} className="upload-btn">{props.loading?"loading...":"Upload Product"}</button>
+                    </div>
+        </div>   
 
-            
-        </div>
+
     );
+
 }
