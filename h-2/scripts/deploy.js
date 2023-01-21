@@ -1,19 +1,20 @@
 const { ethers } = require("hardhat");
 require("dotenv").config({ path: ".env" });
 
+const {TOKEN_ADDRESS} = require("../constants")
 
 async function main() {
 
-  const tokenContract = await ethers.getContractFactory("IITJToken");
+  const manageContract = await ethers.getContractFactory("Manage");
   // deploy the contract
-  const deployedTokenContract = await tokenContract.deploy();
+  const deployedManageContract = await manageContract.deploy(TOKEN_ADDRESS);
 
-  await deployedTokenContract.deployed();
+  await deployedManageContract.deployed();
 
   // print the address of the deployed contract
   console.log(
     "Verify Contract Address:",
-    deployedTokenContract.address
+    deployedManageContract.address
   );
 
   console.log("Sleeping.....");
@@ -22,7 +23,9 @@ async function main() {
 
   // Verify the contract after deploying
   await hre.run("verify:verify", {
-    address: deployedTokenContract.address,
+    address: deployedManageContract.address,
+    constructorArguments: [TOKEN_ADDRESS],
+
   });
 }
 

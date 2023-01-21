@@ -4,7 +4,8 @@ pragma solidity ^0.8.17;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-
+// 0x35e50711A230c5963f68f9C2e198d53046c73425
+// https://mumbai.polygonscan.com/address/0x35e50711A230c5963f68f9C2e198d53046c73425#code
 
 
 contract Manage is Ownable{
@@ -67,7 +68,7 @@ contract Manage is Ownable{
 
         if(msg.sender == ownerAdd){
             sendToken = _amount;
-            (bool sent) =  tokenAddress.transfer(_to, sendToken);
+            (bool sent) =  tokenAddress.transferFrom(msg.sender,_to, sendToken);
             require(sent, "Transfer failed");
             studentAddressToDetail[_to].balance+=sendToken;
         }
@@ -83,7 +84,7 @@ contract Manage is Ownable{
         
         require(studentAddressToDetail[msg.sender].balance >= sendToken,"insufficient balance to send");
         // Transfer the tokens
-        require(tokenAddress.transfer(_to, sendToken), "Transfer failed");
+        require(tokenAddress.transferFrom(msg.sender,_to, sendToken), "Transfer failed");
         studentAddressToDetail[_to].balance+=sendToken;
         studentAddressToDetail[msg.sender].balance-= sendToken;
 
@@ -93,9 +94,10 @@ contract Manage is Ownable{
     }
 
     function buyMerch(uint _price) public{
+
         // SafeERC20 token = SafeERC20(tokenAddress);
         require(studentAddressToDetail[msg.sender].balance>=_price,"insufficient balance");
-        (bool sent) =  tokenAddress.transfer(ownerAdd, _price);
+        (bool sent) =  tokenAddress.transferFrom(msg.sender,ownerAdd, _price);
         require(sent, "Transfer failed");
         studentAddressToDetail[msg.sender].balance-=_price;
     }

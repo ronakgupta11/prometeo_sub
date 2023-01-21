@@ -1,0 +1,3 @@
+const TOKEN_ADDRESS = "0xb99FCa642Fc5F58eC774eb33DE88D25848B55f60";
+
+module.exports = { TOKEN_ADDRESS };
