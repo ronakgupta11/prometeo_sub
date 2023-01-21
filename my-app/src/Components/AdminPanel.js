@@ -1,8 +1,8 @@
 import { useState } from "react";
 import MerchSection from "./MerchSection";
 
-export default function AdminPanel(){
-
+export default function AdminPanel(props){
+    const data = props.data;
     const[inMerchTab,setInMerchTab] = useState(false);
     function handleClickMerch(){
         setInMerchTab(true);
@@ -11,7 +11,7 @@ export default function AdminPanel(){
     return(
         <div className="admin-panel-main">
 
-        {inMerchTab && <MerchSection/> }
+        {inMerchTab && <MerchSection data = {data}/> }
         {!inMerchTab && <div className="admin-panel-m">
 
             <div className="container">

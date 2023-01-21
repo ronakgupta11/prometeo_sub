@@ -1,5 +1,16 @@
+import MerchSection from "./MerchSection";
+import { useState } from "react";
 export default function StudentProfile(props){
-    return(<div className="profile-section">
+    const data = props.data;
+    const[inMerchTab,setInMerchTab] = useState(false);
+    function handleClickMerch(){
+        setInMerchTab(true);
+    }
+    return(
+    <div>
+        {inMerchTab && <MerchSection data = {data}/> }
+
+    {!inMerchTab && <div className="profile-section">
                 <div className="profile-container">
             <div className="profile">
             <div className="profile-info">
@@ -14,9 +25,12 @@ export default function StudentProfile(props){
 
                 <button className="btn send-token">Send Token</button>
     
-                <button className="btn spend-token">Spend Token</button>
+                <button onClick = {handleClickMerch} className="btn spend-token">Spend Token</button>
             
             
         </div>
-    </div>)
+    </div>}
+    </div>
+
+    )
 }

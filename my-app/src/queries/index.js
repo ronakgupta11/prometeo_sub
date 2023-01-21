@@ -26,6 +26,7 @@ export function FETCH_CREATED_PRODUCT() {
                 sender
                 reciever
                 amount
+                transactionHash
               }
           }`;
 

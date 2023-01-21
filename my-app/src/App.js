@@ -47,6 +47,7 @@ function App() {
     const signer = await getProviderOrSigner(true);
     const add = await signer.getAddress()
     setWalletConnected(true);
+    setAddress(add);
 
     const contract =  new ethers.Contract(
       contractAddress,
@@ -113,6 +114,7 @@ function App() {
         setProductsData(response1.productCreateds);
         setData(response2.studentCreateds);
         setTransactions(response3.tokenTransfers);
+        console.log(response1,response2,response3)
       } catch (err) {
         // setError(err);
         console.log(err)
@@ -127,10 +129,10 @@ function App() {
   return (
     <div className="App">
       <Header connect = {connectWallet} disconnect = {disconnect} walletStatus = {walletConnected} />
-      {/* {!walletConnected && <Entry/>}
-      {walletConnected && isAdmin && <AdminPanel/>}
+      {!walletConnected && <Entry/>}
+      {walletConnected && isAdmin && <AdminPanel data = {productsData}/>}
       {walletConnected && isStudent && !regStudent && <NotStudentTab loading = {loading} setLoading = {setLoading} getSigner = {getProviderOrSigner}/>}
-      {walletConnected && isStudent && regStudent && <StudentPanel data = {data} transactions = {transactions}/>} */}
+      {walletConnected && isStudent && regStudent && <StudentPanel address = {address} productsData= {productsData} data = {data} transactions = {transactions}/>}
 {/* <AdminPanel/> */}
 <StudentPanel/>
       <Footer />
