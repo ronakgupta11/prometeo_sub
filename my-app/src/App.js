@@ -3,11 +3,13 @@ import './App.css';
 import {ethers} from "ethers";
 import Web3Modal from "web3modal";
 import { useEffect, useState } from 'react';
+import {abi,contractAddress} from "./constants/index"
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Entry from './Components/Entry';
 import AdminPanel from './Components/AdminPanel';
 import StudentPanel from './Components/StudentPanel';
+
 
 function App() {
   const [walletConnected, setWalletConnected] = useState(false);
@@ -46,6 +48,10 @@ function App() {
       // renderButton();
       setAddress("");
   }
+
+  useEffect(()=>{
+    
+  })
 
   return (
     <div className="App">
