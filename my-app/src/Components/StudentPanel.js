@@ -3,11 +3,9 @@ export default function StudentPanel(props){
     const address = props.address;
     
     
-    const data = props.data;
-    // .filter(obj => obj.studentAdd === address )
+    const data = props.data.filter(obj => obj.studentAdd === address )
     const productsData = props.productsData;
-    const transactionData = props.transactions
-    // .filter(obj => obj.sender === address)
+    const transactionData = props.transactions.filter(obj => obj.sender === address)
     const allTransactions = transactionData.map((tr,i) => {
         return(
             <h6 key = {i}>{`${tr.id}: ${tr.amount} sent to ${tr.reciever} with ${tr.transactionHash} txn hash`}</h6>
@@ -17,7 +15,7 @@ export default function StudentPanel(props){
     return(
 
         <div className="student-panel-main">
-            <StudentProfile name = {data[0].name} image = {data[0].image} balance = {data[0].balance} data = {productsData}/>
+            <StudentProfile name = {data.name} image = {data.image} balance = {data.balance} data = {productsData}/>
             <h3>Activity:</h3>
             {allTransactions}
             

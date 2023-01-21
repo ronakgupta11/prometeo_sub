@@ -122,7 +122,7 @@ function App() {
     };
     //fetch data on every 5 seconds
     // console.log(FETCH_CREATED_PRODUCT());
-    const interval = setInterval(fetchData, 2000);
+    const interval = setInterval(fetchData, 500);
     return () => clearInterval(interval);
   }, [data,productsData,transactions]);
 
@@ -134,7 +134,7 @@ function App() {
       {walletConnected && isStudent && !regStudent && <NotStudentTab loading = {loading} setLoading = {setLoading} getSigner = {getProviderOrSigner}/>}
       {walletConnected && isStudent && regStudent && <StudentPanel address = {address} productsData= {productsData} data = {data} transactions = {transactions}/>}
 {/* <AdminPanel/> */}
-<StudentPanel/>
+{/* <StudentPanel/> */}
       <Footer />
 
     </div>
