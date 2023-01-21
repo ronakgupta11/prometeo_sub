@@ -49,8 +49,15 @@ function App() {
       setAddress("");
   }
 
-  useEffect(()=>{
+  useEffect(async ()=>{
+    const signer = await getProviderOrSigner();
+    const contract =  new ethers.Contract(
+      contractAddress,
+      abi,
+      signer
+    );
     
+
   })
 
   return (
