@@ -130,7 +130,7 @@ function App() {
     <div className="App">
       <Header connect = {connectWallet} disconnect = {disconnect} walletStatus = {walletConnected} />
       {!walletConnected && <Entry/>}
-      {walletConnected && isAdmin && <AdminPanel data = {productsData}/>}
+      {walletConnected && isAdmin && <AdminPanel students = {data} loading = {loading} setLoading = {setLoading} getSigner = {getProviderOrSigner} data = {productsData}/>}
       {walletConnected && isStudent && !regStudent && <NotStudentTab loading = {loading} setLoading = {setLoading} getSigner = {getProviderOrSigner}/>}
       {walletConnected && isStudent && regStudent && <StudentPanel loading = {loading} setLoading = {setLoading} getSigner = {getProviderOrSigner} address = {address} productsData= {productsData} data = {data} transactions = {transactions}/>}
 {/* <AdminPanel/> */}

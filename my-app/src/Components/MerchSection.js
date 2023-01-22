@@ -18,7 +18,7 @@ export default function MerchSection(props){
     }
     return(
         <div>
-            {inProductDetailTab && <ProductDetails/>}
+            {inProductDetailTab && <ProductDetails loading = {props.loading} setLoading = {props.setLoading} getSigner = {props.getSigner}/>}
 
         {!inProductDetailTab && <div className="cards-section">
             <button onClick = {handleAddProduct} className="addProduct-btn">Add Merchandise</button>

@@ -1,17 +1,65 @@
 import { useState } from "react";
 import MerchSection from "./MerchSection";
-
+import { BigNumber } from "ethers";
+import { ethers } from "ethers";
+import {abi,contractAddress} from "../constants/index"
 export default function AdminPanel(props){
     const data = props.data;
+    const studentData = props.students;
     const[inMerchTab,setInMerchTab] = useState(false);
     function handleClickMerch(){
         setInMerchTab(true);
     }
+    const [reciever,setReciever] = useState("");
+const [amount,setAmount] = useState(BigNumber.from("0"));
+const send = async () => {
+    try {
+
+        props.setLoading(true);
+      // Get the signer from web3Modal, which in our case is MetaMask
+      // No need for the Signer here, as we are only reading state from the blockchain
+      const signer = await props.getSigner(true);
+
+      // We connect to the Contract using a signer because we want the owner to
+      // sign the transaction
+      const contract = new ethers.Contract(
+        contractAddress,
+        abi,
+        signer
+      );
+    //   setLoading(true);
+      // call the startGame function from the contract
+      const tx = await contract.sendTokenToAddress(reciever,amount);
+      await tx.wait();
+      props.setLoading(false);
+    } catch (err) {
+      console.error(err);
+      props.setLoading(false);
+    }
+  };
+
+
+function handleReciever(e){
+    setReciever(e.target.value);
+
+}
+function handleAmount(e){
+    setAmount(BigNumber.from(e.target.value));
+    
+}
+
+    const allStudents = studentData.map((st,i) => {
+        return(
+            <h6 key = {i}>{`${st.id}:       ${st.name}        ${st.studentId}         ${st.studentAdd}       ${st.batch}`}</h6>
+            
+        )
+    })
+
 
     return(
         <div className="admin-panel-main">
 
-        {inMerchTab && <MerchSection data = {data}/> }
+        {inMerchTab && <MerchSection data = {data} loading = {props.loading} setLoading = {props.setLoading} getSigner = {props.getSigner}/> }
         {!inMerchTab && <div className="admin-panel-m">
 
             <div className="container">
@@ -26,46 +74,25 @@ export default function AdminPanel(props){
       
     <div className="middle-container">
         <div className="buttons-container">
-            <button className="button button-1">Batch 1</button>
+            {/* <button className="button button-1">Batch 1</button>
             <button className="button button-2">Batch 2</button>
             <button className="button button-3">Batch 3</button>
-            <button className="button button-4">Batch 4</button>
+            <button className="button button-4">Batch 4</button> */}
             <button className="button button-5">Not verified</button>
         </div>
+        <div>
 
-        <div className="table-section">
-            <table>
-            <thead>
-            <tr>
-                <th>Sr.</th>
-                <th>Student ID</th>
-                <th>Name</th>
-                <th>Send Token</th>
-            </tr>
-            </thead>
-            <tbody>
+<input onChange={handleReciever} className="input-area" placeholder="enter student wallet address"></input>
+<input onChange={handleAmount} className="input-area" placeholder="enter amount"></input>
+<button onClick={send} className="btn send-token">{props.loading?"loading":"Send Token"}</button>
+</div>
 
-            <tr>
-                <td>Value 1</td>
-                <td>Value 2</td>
-                <td>Value 3</td>
-                <td>
-                    <button className="send-token-btn">Send Token</button>
-                </td>
-            </tr>
-            <tr>
-                <td>Value 5</td>
-                <td>Value 6</td>
-                <td>Value 7</td>
-                <td>
-                    <button className="send-token-btn">Send Token</button>
-                </td>
-            </tr>
 
-            
-            </tbody>
-        </table>
-        </div>
+        
+        <h3>
+            ALL STUDENTS
+        </h3>
+        {allStudents}
 
     </div>
             
