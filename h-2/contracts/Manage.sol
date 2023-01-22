@@ -4,8 +4,8 @@ pragma solidity ^0.8.17;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-// 0x391Ee177255844e97fB7455d425DD0674d2CDe8A
-// https://mumbai.polygonscan.com/address/0x391Ee177255844e97fB7455d425DD0674d2CDe8A#code
+// 0x365b75Ff1C40FBe12F468120c8EBeC9814e95B0c
+// https://mumbai.polygonscan.com/address/0x365b75Ff1C40FBe12F468120c8EBeC9814e95B0c#code
 
 
 contract Manage is Ownable{
@@ -20,7 +20,7 @@ contract Manage is Ownable{
     }
     
 
-    event studentCreated(uint batch,string  studentId, string name, address studentAdd); //created by student itself
+    event studentCreated(uint batch,string  studentId, string name,string image,address studentAdd); //created by student itself
     // event studentDeleted();  // deleted by admin
     event studentVerified(uint batch, string studentId, string name, bool verifyStatus); // verified by admin
     // event 
@@ -59,7 +59,7 @@ contract Manage is Ownable{
 
     function createStudent(string memory _image, string memory _studentId,string memory _name,uint _batch) public{
         studentAddressToDetail[msg.sender] = Student(_image,_studentId,_name,_batch,0,false);
-        emit studentCreated(_batch,_studentId,_name,msg.sender);
+        emit studentCreated(_batch,_studentId,_name,_image,msg.sender);
 
     }
 

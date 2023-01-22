@@ -50,7 +50,7 @@ function handleAmount(e){
 
     const allStudents = studentData.map((st,i) => {
         return(
-            <h6 key = {i}>{`${st.id}:       ${st.name}        ${st.studentId}         ${st.studentAdd}       ${st.batch}`}</h6>
+            <h4 key = {i}>{`${i+1}:       ${st.name}        ${st.studentId}         ${st.studentAdd}       ${st.batch}`}</h4>
             
         )
     })
@@ -78,7 +78,9 @@ function handleAmount(e){
             <button className="button button-2">Batch 2</button>
             <button className="button button-3">Batch 3</button>
             <button className="button button-4">Batch 4</button> */}
-            <button className="button button-5">Not verified</button>
+            <button className="button button-1">All Students</button>
+            <button className="button button-3">verified</button>
+            <button className="button button-4">Not verified</button>
         </div>
         <div>
 

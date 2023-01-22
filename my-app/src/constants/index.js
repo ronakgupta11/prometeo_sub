@@ -77,6 +77,12 @@ export const abi = [
       },
       {
         "indexed": false,
+        "internalType": "string",
+        "name": "image",
+        "type": "string"
+      },
+      {
+        "indexed": false,
         "internalType": "address",
         "name": "studentAdd",
         "type": "address"
@@ -413,4 +419,4 @@ export const abi = [
   }
 ];
 
-export const contractAddress = "0x391Ee177255844e97fB7455d425DD0674d2CDe8A"
+export const contractAddress = "0x365b75Ff1C40FBe12F468120c8EBeC9814e95B0c"
