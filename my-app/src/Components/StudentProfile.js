@@ -51,7 +51,7 @@ function handleAmount(e){
         {inMerchTab && <MerchSection data = {data}/> }
 
     {!inMerchTab && <div className="profile-section">
-                <div className="profile-container">
+                <div className="profile-container" style={{marginTop:"2rem",marginBottom:"0.5rem"}}>
             <div className="profile">
             <div className="profile-info">
                 <img src={props.image} alt="Profile Photo"></img>
@@ -61,7 +61,7 @@ function handleAmount(e){
         </div>
 
         <div className="middle-container">
-            <h2>Balance <span className="balance">{props.balance}</span></h2>
+            <h2>{`Balance :  `}</h2>
             <div>
 
                 <input onChange={handleReciever} className="input-area" placeholder="enter wallet address"></input>

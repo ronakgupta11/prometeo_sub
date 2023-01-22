@@ -8,7 +8,7 @@ export default function Footer(){
                 <h6 className="footer-content">About</h6>
                 <h6 className="footer-content">Contact</h6>
               </nav>
-          <p className="copyright-content">Copyright © 2022 My Website</p>
+          <p className="copyright-content">Copyright © 2022 Campus Coin</p>
         </div>
     </footer>
         </div>

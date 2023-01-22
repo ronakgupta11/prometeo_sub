@@ -25,6 +25,7 @@ function App() {
   const [productsData,setProductsData] = useState([]);
   const [transactions,setTransactions] = useState([]);
   const [admin,setAdmin] = useState("");
+  const [balance,setBalance] = useState("0")
 
 
   const web3Modal = new Web3Modal({
@@ -63,20 +64,21 @@ function App() {
     // console.log(add);
 
 
-    if(add === owner){
+    if(add.toLowerCase() === owner.toLowerCase()){
+      setIsAdmin(true);
       setRegStudent(false);
       setIsStudent(false);
-      setIsAdmin(true);
 
       
     }
     else{
-    const data =  await contract.getData(add)
-    if (data.name){
+    const idata =  await contract.getData(add)
+    if (idata.name){
       setRegStudent(true);
       setIsStudent(true);
-      console.log(data)
-      setData(data)
+      console.log(idata)
+      setBalance(idata.balance)
+      console.log(balance)
       setAdmin(false)
 
 
@@ -132,7 +134,7 @@ function App() {
       {!walletConnected && <Entry/>}
       {walletConnected && isAdmin && <AdminPanel students = {data} loading = {loading} setLoading = {setLoading} getSigner = {getProviderOrSigner} data = {productsData}/>}
       {walletConnected && isStudent && !regStudent && <NotStudentTab loading = {loading} setLoading = {setLoading} getSigner = {getProviderOrSigner}/>}
-      {walletConnected && isStudent && regStudent && <StudentPanel loading = {loading} setLoading = {setLoading} getSigner = {getProviderOrSigner} address = {address} productsData= {productsData} data = {data} transactions = {transactions}/>}
+      {walletConnected && !isAdmin  &&isStudent && regStudent && <StudentPanel loading = {loading} setLoading = {setLoading} getSigner = {getProviderOrSigner} address = {address} productsData= {productsData} data = {data} transactions = {transactions} balance={balance}/>}
 {/* <AdminPanel/> */}
 {/* <StudentPanel/> */}
       <Footer />

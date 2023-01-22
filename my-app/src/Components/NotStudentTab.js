@@ -7,11 +7,11 @@ export default function NotStudentTab(props){
 
 
 
-    const zero = BigNumber.from("0");
+    // const zero = BigNumber.from("0"); 
     const [image,setImage] = useState("");
     const [name,setName] = useState("");
     const [studentId,setStudentId] = useState("");
-    const [batch,setBatch] = useState(zero);
+    const [batch,setBatch] = useState(0);
 
 
     function handleImage(e){

@@ -14,6 +14,7 @@ export function FETCH_CREATED_PRODUCT() {
             id
             batch
             name
+            image
             studentId
             studentAdd
           }

@@ -50,7 +50,7 @@ function handleAmount(e){
 
     const allStudents = studentData.map((st,i) => {
         return(
-            <h4 key = {i}>{`${i+1}:       ${st.name}        ${st.studentId}         ${st.studentAdd}       ${st.batch}`}</h4>
+            <h4 key = {i}>{`${i+1}:---------${st.name}--------${st.studentId}--------${st.studentAdd}--------${st.batch}`}</h4>
             
         )
     })
