@@ -187,12 +187,14 @@ footer h6 {
   border-radius: 7px;
   border: 1px solid black;
   background: transparent;
-  color: white;
+  color: #333;
+  padding-left:10px ;
 }
 
 .input-area::placeholder{
   /* color: whit; */
   padding-left: 10px;
+  /* color: #333; */
   /* opacity: 0.6; */
 }
 
@@ -313,4 +315,19 @@ font-size: 1rem;
 overflow: hidden;
 text-overflow: ellipsis;
 white-space: nowrap;
+}
+.profile-section{
+  width: 90%;
+  margin: auto;
+}
+.tr{
+  margin: 2rem;
+}
+.entry{
+  /* text-align: centre; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90%;
+  color: #333;
 }

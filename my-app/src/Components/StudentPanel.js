@@ -15,9 +15,14 @@ export default function StudentPanel(props){
     return(
 
         <div className="student-panel-main">
-            <StudentProfile name = {data.name} image = {data.image} balance = {data.balance} data = {productsData}/>
+            <StudentProfile  getSigner = {props.getSigner} loading = {props.loading} setLoading = {props.setLoading} name = {data.name} image = {data.image} balance = {data.balance} data = {productsData}/>
+            <div className="tr">
+
             <h3>Activity:</h3>
             {allTransactions}
+            </div>
+            {/* <h6>{`1 : 50 IIIJT sent to 0x294d985B6BC5dA375b571B5fDE228334343f4EdF with 0x294d985B6BC5dA375b571B5fDE228334343f4EdF txn hash`}</h6> */}
+
             
             
         </div>

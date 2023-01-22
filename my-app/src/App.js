@@ -132,7 +132,7 @@ function App() {
       {!walletConnected && <Entry/>}
       {walletConnected && isAdmin && <AdminPanel data = {productsData}/>}
       {walletConnected && isStudent && !regStudent && <NotStudentTab loading = {loading} setLoading = {setLoading} getSigner = {getProviderOrSigner}/>}
-      {walletConnected && isStudent && regStudent && <StudentPanel address = {address} productsData= {productsData} data = {data} transactions = {transactions}/>}
+      {walletConnected && isStudent && regStudent && <StudentPanel loading = {loading} setLoading = {setLoading} getSigner = {getProviderOrSigner} address = {address} productsData= {productsData} data = {data} transactions = {transactions}/>}
 {/* <AdminPanel/> */}
 {/* <StudentPanel/> */}
       <Footer />
